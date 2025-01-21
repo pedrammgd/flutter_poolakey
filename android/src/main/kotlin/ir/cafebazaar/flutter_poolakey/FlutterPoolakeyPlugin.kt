@@ -102,6 +102,7 @@ class FlutterPoolakeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
         result.success(BuildConfig.POOLAKEY_VERSION)
     }
 
+
     private fun connect(inAppBillingKey: String?, result: Result) {
         val securityCheck = if (inAppBillingKey != null) {
             SecurityCheck.Enable(rsaPublicKey = inAppBillingKey)
@@ -124,6 +125,29 @@ class FlutterPoolakeyPlugin : FlutterPlugin, MethodCallHandler, ActivityAware {
             }
         }
     }
+
+//    private fun connect(inAppBillingKey: String?, result: Result) {
+//        val securityCheck = if (inAppBillingKey != null) {
+//            SecurityCheck.Enable(rsaPublicKey = inAppBillingKey)
+//        } else {
+//            SecurityCheck.Disable
+//        }
+//        val paymentConfiguration = PaymentConfiguration(localSecurityCheck = securityCheck)
+//
+//        payment = Payment(context = requireActivity, config = paymentConfiguration)
+//
+//        paymentConnection = payment.connect {
+//            connectionSucceed {
+//                result.success(true)
+//            }
+//            connectionFailed {
+//                result.error("CONNECTION_HAS_FAILED", it.toString(), null)
+//            }
+//            disconnected {
+//                channel.invokeMethod("disconnected", null)
+//            }
+//        }
+//    }
 
     private fun disconnect(result: Result){
         paymentConnection.disconnect()
